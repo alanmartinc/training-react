@@ -44,7 +44,7 @@ const Formulario = () => {
                     <label>Repetir contraseña</label>
                     <input type="text"  {...register('passwordConfirmation', {
                         required: "confirmar contrasela",
-                        pattern: /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[$@$!%?&])([A-Za-z\d$@$!%?&]|[^ ]){8,15}$/,
+                        pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
                         validate: {
                             matchesPreviousPassword: (value) => {
                                 const { password } = getValues();
