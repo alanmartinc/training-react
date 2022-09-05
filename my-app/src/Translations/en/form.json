@@ -1,0 +1,13 @@
+{
+    "form": {
+        "title": "Form",
+        "name": "Name",
+        "password": "password",
+        "passwordRep": "Repeat password",
+        "email": "Email",
+        "yearOld": "Years old",
+        "country": "Country",
+        "send": "Send",
+        "includePhone": "Include phone?"
+    }
+}

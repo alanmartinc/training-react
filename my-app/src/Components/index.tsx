@@ -1,10 +1,34 @@
+import React, {useId} from 'react'
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next"
+
+type Inputs = { 
+    nombre: string,
+    password: string,
+    passwordConfirmation: string,
+    email: string,
+    edad: number,
+    pais: string,
+    checkTelefono: boolean,
+    telefono: number,
+    message: string
+}
 
 const Formulario = () => {
 
-    const {register, formState: { errors }, handleSubmit, watch, getValues} = useForm({
+    const [t, i18n] = useTranslation("form")
+
+    const {register, formState: { errors }, handleSubmit, watch, getValues} = useForm<Inputs>({
         defaultValues: {
-           // nombre: 'pone aca el nombre'
+            nombre: '',
+            password: '',
+            passwordConfirmation: '',
+            email: '',
+            edad: undefined,
+            pais: '',
+            checkTelefono: false,
+            telefono: undefined, 
+            message: '',
         }
     }) // register es para registrar los campos 
     const formSubmit = (data) =>{
@@ -15,25 +39,33 @@ const Formulario = () => {
     }
     
     const incluirTelefono = watch('checkTelefono')
-    
+    const id = useId()
+    console.log(id, "id")
     return (
         <div>
-            <h2>Formulario</h2>
+            <h2>{t("form.title")}</h2>
+            <button onClick={() => i18n.changeLanguage("es")}>ES</button>
+            <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+   
             <form  onSubmit={handleSubmit(formSubmit)}>
                 <div>
-                    <label>Nombre</label>
-                    <input type="text"  {...register('nombre', {
+                    <label htmlFor={id + 'name'}>{t("form.name")}</label>
+                    <input id={id + 'name'} type="text"  {...register('nombre', {
                         required: true,
-                        minLength: 3
+                        minLength: {
+                            value: 3,
+                            message: "minimo 3 letras :D"
+                        },
+                        
                     })}/>
                     {errors.nombre?.type === 'required' && <p>El campo nombre es obligatorio</p>}
-                    {errors.nombre?.type === 'minLength' && <p>minimo 3 letras</p>}
+                    {errors.nombre?.type === 'minLength' && <p>{errors.nombre?.message}</p>}
                 </div>
 
 
                 <div>
-                    <label>Contraseña</label>
-                    <input type="text"  {...register('password', {
+                    <label htmlFor={id + 'password'}>{t("form.password")}</label>
+                    <input id={id + 'password'} type="password"  {...register('password', {
                         required: "password es requerida",
                     })}/>
                     {errors.password && (
@@ -41,8 +73,8 @@ const Formulario = () => {
                     )}
                 </div>
                 <div>
-                    <label>Repetir contraseña</label>
-                    <input type="text"  {...register('passwordConfirmation', {
+                    <label htmlFor={id + 'reppass'}>{t("form.passwordRep")}</label>
+                    <input id={id + 'reppass'} type="password"  {...register('passwordConfirmation', {
                         required: "confirmar contrasela",
                         pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
                         validate: {
@@ -63,16 +95,16 @@ const Formulario = () => {
 
 
                 <div>
-                    <label>Email</label>
-                    <input type="text"  {...register('email', {
+                    <label htmlFor={id + 'email'}>Email</label>
+                    <input id={id + 'email'} type="text"  {...register('email', {
                         required: true,
                         pattern: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
                     })}/>
                     {errors.email?.type === 'pattern' && <p>Formato de mails incorrecto</p>}
                 </div>
                 <div>
-                    <label>Edad</label>
-                    <input type="text" {...register('edad', {
+                    <label htmlFor={id + 'edad'}>{t("form.yearOld")}</label>
+                    <input id={id + 'edad'} type="number" {...register('edad', {
                         validate: edadValidator
                     })}/>
                     {errors.edad?.type && <p>Tenes que ser mayor de 18</p>}
@@ -80,25 +112,25 @@ const Formulario = () => {
             
              
                 <div>
-                    <label>Pais</label>
-                    <select {...register('pais')}>
+                    <label htmlFor={id + 'country'}>{t("form.country")}</label>
+                    <select id={id + 'country'} {...register('pais')}>
                         <option value="ar">Argentina</option>
                         <option value="br">Brasil</option>
                         <option value="pe">Peru</option>
                     </select>
                 </div>
-                <input type="submit" value="enviar"/>
+                <input type="submit" value={t("form.send")}/>
 
 
                 
                 <div>
-                    <label>Incluir telefono?</label>
-                    <input type="checkbox" {...register('checkTelefono')}/>
+                    <label htmlFor={id + 'checkphone'}>{t("form.includePhone")}</label>
+                    <input id={id + 'checkphone'} type="checkbox" {...register('checkTelefono')}/>
                 </div>
                 {incluirTelefono && (
                     <div>
-                        <label>Telefono</label>
-                        <input type="text" {...register('telefono')}/>
+                       
+                        <input id={id + 'phone'} type="tel" {...register('telefono')}/>
                     </div>
                 )
 

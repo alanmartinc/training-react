@@ -1,12 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Formulario from './Components/Formulario';
+import React from 'react'
+import {Route, Routes } from 'react-router-dom';
+import Formulario from './Components/index.tsx';
+ 
 
 
 function App() {
   return (
-    <div className="App">
-       <Formulario />
-    </div>
+    <Routes>
+     
+       <Route path="/" element={<Formulario />} />
+    
+    </Routes>
   );
 }
 
