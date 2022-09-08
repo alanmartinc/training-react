@@ -7,6 +7,8 @@ import { I18nextProvider } from "react-i18next"
 import i18next from 'i18next';
 import form_en from "./Translations/en/form.json"
 import form_es from "./Translations/es/form.json"
+import login_en from "./Translations/en/login.json"
+import login_es from "./Translations/es/login.json"
 
 i18next.init({
   interpolation: { escapeValue: false},
@@ -14,9 +16,11 @@ i18next.init({
   resources: {
     es: {
       form: form_es,
+      login: login_es,
     },
     en: {
-      form: form_en
+      form: form_en,
+      login: login_en,
     }
   }
 })
