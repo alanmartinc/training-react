@@ -1,0 +1,13 @@
+{
+    "form": {
+        "title": "Formulario",
+        "name": "Nombre",
+        "password": "Contraseña",
+        "passwordRep": "Repetir contraseña",
+        "email": "Email",
+        "yearOld": "Edad",
+        "country": "Pais",
+        "send": "Enviar",
+        "includePhone": "Incluir telefono?"
+    }
+}
