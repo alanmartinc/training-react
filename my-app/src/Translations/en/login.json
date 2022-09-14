@@ -1,0 +1,10 @@
+{
+    "login": {
+        "title": "Login",
+        "user": "User",
+        "password": "password",
+        "enter": "Enter",
+        "errpass": "Incorrect password",
+        "erruser": "User don't exist"
+    }
+}

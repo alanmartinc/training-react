@@ -1,0 +1,10 @@
+{
+    "login": {
+        "title": "Ingresar",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "enter": "Ingresar",
+        "errpass": "Contraseña incorrecta",
+        "erruser": "El usuario no existe"
+    }
+}
